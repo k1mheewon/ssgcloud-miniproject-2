@@ -20,14 +20,14 @@ def login():
 		if not id or not pw:  # 아이디 또는 비밀번호가 비어 있는 경우
 			return "<script>alert(\'ID와 PW를 확인하세요\');window.history.back();</script>"
 		conn = pymysql.connect(
-			host='127.0.0.1', user='root', password='mariadb',
-			db='nonogram', charset='utf8'
+			host='15.164.153.191', user='root', password='mariadb',
+			db='buy_me_lunch', charset='utf8'
 		) # 데이터베이스 접속
 		cursor = conn.cursor() # 커서 객체 생성
 		sql = '''
 			SELECT count(id) 
-			FROM userdata 
-			WHERE userdata.id = %s AND userdata.pw = %s
+			FROM member 
+			WHERE member.id = %s AND member.pw = %s
 		'''
 		cursor.execute(sql,(id,pw)) # SQL 실행
 		row = cursor.fetchone()
@@ -38,4 +38,4 @@ def login():
 			return "<script>alert(\'ID와 PW를 확인하세요\');window.history.back();</script>"	
 		else:
 			session['user_id'] = id
-			return app.mainpage()
+			return app.domainpage()

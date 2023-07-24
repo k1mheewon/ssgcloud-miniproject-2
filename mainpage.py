@@ -8,6 +8,10 @@ from flask import jsonify
 from flask import url_for
 import pymysql 
 
-def logout():
-    session.pop('buy_me_lunch', None)  # 세션에서 user_id 제거
-    return redirect('/login')
+def mainpage():
+	user_id = session.get('user_id')
+	if user_id:
+		return render_template('index.html', user_id=user_id)
+	else:
+		return "You are not logged in <br><a href = '/login'></b>" + \
+		"click here to login</b></a>"

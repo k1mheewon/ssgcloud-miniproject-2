@@ -18,14 +18,14 @@ def addmember():
 		if not id or not pw:  # 아이디 또는 비밀번호가 비어 있는 경우
 			return {'msg': 'ID와 PW를 확인하세요', 'code': 2}
 		conn = pymysql.connect(
-			host='127.0.0.1', user='root', password='mariadb',
-			db='member', charset='utf8'
+			host='15.164.153.191', user='root', password='mariadb',
+			db='buy_me_lunch', charset='utf8'
 		) # 데이터베이스 접속
 		cursor = conn.cursor() # 커서 객체 생성
 		sql = '''
 			SELECT count(id) 
-			FROM userdata 
-			WHERE userdata.id = %s
+			FROM members 
+			WHERE members.id = %s
 		'''
 		cursor.execute(sql,(id,)) # SQL 실행
 		row = cursor.fetchone()
@@ -39,7 +39,7 @@ def addmember():
 		else :	
 			cursor = conn.cursor()
 			sql = '''
-				insert into  userdata (id, pw) values (%s,%s)
+				insert into  members (id, password,member_name,gender,age) values (%s,%s,%s,%s,%s)
 			'''
 			cursor.execute(sql,(id,pw)) # SQL 실행
 			conn.commit()
