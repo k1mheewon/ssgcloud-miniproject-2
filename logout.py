@@ -9,5 +9,5 @@ from flask import url_for
 import pymysql 
 
 def logout():
-    session.pop('buy_me_lunch', None)  # 세션에서 user_id 제거
+    session.pop('user_id', None)  # 세션에서 user_id 제거
     return redirect('/login')

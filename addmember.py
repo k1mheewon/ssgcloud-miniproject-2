@@ -15,11 +15,21 @@ def addmember():
 	else:		
 		id = request.form.get('id')
 		pw = request.form.get('pw')
+		name = request.form.get('name')
+		age = request.form.get('age')
+		gender = request.form.get('gender')
 		if not id or not pw:  # 아이디 또는 비밀번호가 비어 있는 경우
 			return {'msg': 'ID와 PW를 확인하세요', 'code': 2}
+		if not name or not name.isalpha():
+			return {'msg': '이름을 확인해주세요', 'code': 2}
+		if not age or not age.isdigit():
+			return {'msg': '나이를 확인해주세요', 'code': 2}
+		if not gender or len(gender) > 2:
+			return {'msg': '성별을 확인해주세요', 'code': 2}
+		
 		conn = pymysql.connect(
-			host='15.164.153.191', user='root', password='mariadb',
-			db='buy_me_lunch', charset='utf8'
+			host='15.164.153.191', user='team2', password='team2',
+			db='team2', charset='utf8'
 		) # 데이터베이스 접속
 		cursor = conn.cursor() # 커서 객체 생성
 		sql = '''
@@ -41,7 +51,7 @@ def addmember():
 			sql = '''
 				insert into  members (id, password,member_name,gender,age) values (%s,%s,%s,%s,%s)
 			'''
-			cursor.execute(sql,(id,pw)) # SQL 실행
+			cursor.execute(sql,(id,pw,name,gender,age)) # SQL 실행
 			conn.commit()
 			cursor.close() # 커서 객체 종료
 			conn.close() # 접속 해제				

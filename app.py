@@ -24,7 +24,7 @@ def index():
 #login
 @app.route('/login', methods=['get', 'post'])
 def dologin():
-	return login.login()
+    return login.login()
 
 #logout
 @app.route('/logout')
@@ -36,10 +36,12 @@ def dologout():
 def doaddmember():
 	return addmember.addmember()
 
+#메인페이지
 @app.route('/mainpage', methods=['get', 'post'])
 def domainpage():
 	return mainpage.mainpage()
 
+#관리자페이지
 
 
 if __name__ == '__main__':

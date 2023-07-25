@@ -17,17 +17,23 @@ def login():
 	else:
 		id = request.form.get('id')
 		pw = request.form.get('pw')
-		if not id or not pw:  # 아이디 또는 비밀번호가 비어 있는 경우
+		encode = request.form.get('encode')
+		if not id or not pw:  # id, pw, encode 가 비어 있는 경우
 			return "<script>alert(\'ID와 PW를 확인하세요\');window.history.back();</script>"
+		if not encode:  # encode 가 비어 있는 경우
+			return "<script>alert(\'Entrancecode를 확인하세요\');window.history.back();</script>"
+		elif encode != 'ssgcloud':
+			return "<script>alert(\'Entrancecode를 확인하세요\');window.history.back();</script>"
+
 		conn = pymysql.connect(
-			host='15.164.153.191', user='root', password='mariadb',
-			db='buy_me_lunch', charset='utf8'
+			host='15.164.153.191', user='team2', password='team2',
+			db='team2', charset='utf8'
 		) # 데이터베이스 접속
 		cursor = conn.cursor() # 커서 객체 생성
 		sql = '''
 			SELECT count(id) 
-			FROM member 
-			WHERE member.id = %s AND member.pw = %s
+			FROM members 
+			WHERE members.id = %s AND members.password = %s
 		'''
 		cursor.execute(sql,(id,pw)) # SQL 실행
 		row = cursor.fetchone()
