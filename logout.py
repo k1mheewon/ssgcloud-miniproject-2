@@ -10,4 +10,5 @@ import pymysql
 
 def logout():
     session.pop('user_id', None)  # 세션에서 user_id 제거
+    session.pop('user_role',None) # 세션에서 user_role제거
     return redirect('/login')
