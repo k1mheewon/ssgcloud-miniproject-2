@@ -1,53 +1,90 @@
 <!-- 회원가입 UI 제공 -->
-<form action="/addmember" method="post" style="max-width: 400px; margin: 0 auto; padding: 20px; background-color: #f1f1f1; border-radius: 5px;">
-    <h1 style="text-align: center;">회원가입</h1>  
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;700&family=Modak&family=Roboto:ital,wght@0,100;0,700;1,100&family=Train+One&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <style>
+        .container {
+
+            border: 2px solid #ffffff;
+           
+            background-color: #ffffff;
+         
+            font-family: 'Roboto', sans-serif;
+       }
+       .container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Modak', cursive;
+            color :rgb(69, 69, 69);
+        }
+
+    </style>
+
+</head>
+
+
+<form action="/addmember" method="post" style="max-width: 400px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 30px;">
+    <div class="container">
+    <h1  >Sign Up</h1>  
+</div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Heebo:wght@300;700&family=Modak&family=Open+Sans:wght@300&family=REM:wght@600&family=Roboto:ital,wght@0,100;0,400;0,700;1,100&family=Train+One&display=swap" rel="stylesheet">    <style>
         body {
             width: 100%;
             height: 100vh;
-            background: #f1f1f1;
+            background: #E7DE8B;
             display: grid;
             place-items: center;
-            font-family: "Poppins", sans-serif;
+            border-radius: 40px;
+            font-family: 'Heebo', sans-serif;
+            color: #404040;
             /* font-size: 5rem; */
-            font-weight: 800;s
-        }
-    </style> 
-    <p style="text-align: center;">
+            font-weight: 300;
+
+            }
         
-        <label for="ID" style="display: block; margin-bottom: 5px;">ID:</label>
-        <input type="text" name ="id"
-            style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+    </style>
+    <p style="text-align: left; font-family: 'Heebo', sans-serif;">
+        
+        <label for="ID" style="display: block; margin-bottom: 5px;">아이디:</label>
+        <input type="text" name ="id" placeholder="아이디를 입력해 주세요."
+            style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px;">
     
          <img id=    "id_check_sucess" style="display: none;">
         <label for="pwd" 
-            style="display: block; margin-bottom: 5px;">Password:</label> 
-        <input type="text" name ="pw" required
-            style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            style="display: block; margin-bottom: 5px;">비밀번호:</label> 
+        <input type="text" name ="pw" required placeholder="비밀번호를 입력해 주세요."
+            style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px;">
         <label for="member_name" 
             style="display: block; margin-bottom: 5px;">이름:</label> 
-        <input type="text" name ="name" required
-            style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">       
+        <input type="text" name ="name" required placeholder="이름을 입력해 주세요."
+            style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px;">       
         <label for="age" 
             style="display: block; margin-bottom: 5px;">나이:</label> 
-        <input type="text" name ="age" required
-            style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
-        <label for="gender" style="display: block; margin-bottom: 5px;">성별:</label>
-        <input type="text" name ="gender" required
-            style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <input type="text" name ="age" required placeholder="나이를 입력해 주세요."
+            style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px;">
+            <label for="gender" style="display: block; margin-bottom: 5px;">성별:</label>
+            <select name="gender" required style="width: 100%; padding: 8px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="" disabled selected>성별을 선택해 주세요.</option>
+                <option value="M">남</option>
+                <option value="W">여</option>
+            </select>
         
         
         
             <button type="button" id="submit"
-            style="width: 100%; padding: 10px; background-color: #4CAF50; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+            style="width: 100%; padding: 10px; background-color: #448146; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
             Submmit
         </button>
         <button type="button" onclick="location.href='/login'"
-            style="width: 100%; padding: 10px; background-color: #f44336; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; text-align: center;">
+            style="width: 100%; padding: 10px; background-color: #737171; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; text-align: center;">
             Go back to login   
         </button>
-    
-    
     </p>
 </form>
 
