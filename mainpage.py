@@ -10,8 +10,13 @@ import pymysql
 
 def mainpage():
 	user_id = session.get('user_id')
+	user_role = session.get('user_role')
+	if user_id and user_role == 'admin':
+		show_button = True
+	else:
+		show_button = False
 	if user_id:
-		return render_template('index.html', user_id=user_id)
+		return render_template('index.html', user_id=user_id,show_button=show_button)
 	else:
 		return "You are not logged in <br><a href = '/login'></b>" + \
 		"click here to login</b></a>"
