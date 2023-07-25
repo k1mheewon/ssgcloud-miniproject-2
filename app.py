@@ -8,7 +8,7 @@ from flask import jsonify
 from flask import url_for
 import pymysql 
 
-import login, logout, addmember,mainpage
+import login, logout, addmember,mainpage,adminpage
 
 app = Flask(__name__) # 초기화
 app.secret_key = 'your_secret_key'
@@ -42,7 +42,14 @@ def domainpage():
 	return mainpage.mainpage()
 
 #관리자페이지
+@app.route('/adminpage', methods=['get', 'post'])
+def doadminpage():
+	return adminpage.adminpage()
 
+#등록요청된 식당관리
+@app.route('/handle_approval', methods=['POST'])
+def dohandle_approval():
+     return adminpage.handle_approval()
 
 if __name__ == '__main__':
     app.run(debug= True)

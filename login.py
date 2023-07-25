@@ -44,4 +44,8 @@ def login():
 			return "<script>alert(\'ID와 PW를 확인하세요\');window.history.back();</script>"	
 		else:
 			session['user_id'] = id
+			if id == 'admin':
+				session['user_role'] = 'admin'
+			else:
+				session['user_role'] = 'user'
 			return app.domainpage()

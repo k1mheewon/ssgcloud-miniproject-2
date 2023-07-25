@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매장등록 요청</title>
+</head>
+<body>
+    <h1>요청 목록</h1>
+    <table>
+        <thead>
+            <tr>
+                <th></th> <!-- 체크박스를 위한 빈 컬럼 -->
+                <th>매장명</th>
+                <th>음식종류</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td><input type="checkbox" onchange="handleRowSelection(this)" /></td> <!-- 체크박스 -->
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>   
+    <button class="btn" id="Approved" onclick="handleApproval('approved')">승인</button>
+    <button class="btn" id="Notapproved" onclick="handleApproval('notapproved')">거절</button>
+    <br><br>
+    <button class="btn" onclick="location.href='/mainpage'">돌아가기</button>
+</body>
+</html>
+<script>
+    // 행 선택 처리 함수
+    function handleRowSelection(checkbox) {
+        const row = checkbox.parentNode.parentNode;
+        if (checkbox.checked) {
+            row.classList.add('selected');
+        } else {
+            row.classList.remove('selected');
+        }
+    }
+
+    function handleApproval(action) {
+        // 선택된 행의 데이터를 가져오기
+        const table = document.querySelector('table');
+        const selectedRows = table.querySelectorAll('.selected');
+
+        if (selectedRows.length === 0) {
+            alert('식당을 선택해주세요!');
+            return;
+        }
+
+        const selectedData = [];
+        selectedRows.forEach(row => {
+            const restaurantName = row.cells[1].innerText;
+            const foodType = row.cells[2].innerText;
+            const address = row.cells[3].innerText;
+
+            selectedData.push({
+                name: restaurantName,
+                type: foodType,
+                address: address
+            });
+        });
+
+        // 선택된 체크박스 데이터를 서버로 전송 (AJAX)
+        fetch('/handle_approval', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                data: selectedData,
+                action: action
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.msg);
+            if (data.code === 1) {
+                // 성공적으로 처리된 경우 row[3] 값 변경 또는 행 삭제
+                location.href = '/adminpage';
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+</script>

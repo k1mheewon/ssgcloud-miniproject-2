@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>맛집 추천</h1>
+    {% if show_button %}
+        <!-- show_button이 True인 경우에만 버튼을 보여줌 -->
+        <button type="button" onclick="location.href='/adminpage'">관리자메뉴</button>
+    {% endif %}
     <a href="/logout">Logout</a>
 </body>
 </html>
